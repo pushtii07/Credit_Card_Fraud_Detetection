@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credit Card Fraud Detection</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#0f172a;
+            color:white;
+            margin:0;
+            padding:40px;
+        }
+
+        .container{
+            max-width:900px;
+            margin:auto;
+            background:#1e293b;
+            padding:30px;
+            border-radius:15px;
+        }
+
+        h1{
+            text-align:center;
+        }
+
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:15px;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            border:none;
+            border-radius:8px;
+        }
+
+        button{
+            width:100%;
+            margin-top:25px;
+            padding:15px;
+            background:#2563eb;
+            color:white;
+            font-size:18px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+        }
+
+        #result{
+            margin-top:25px;
+            font-size:24px;
+            text-align:center;
+            font-weight:bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💳 Credit Card Fraud Detection</h1>
+
+<div class="grid" id="inputs"></div>
+
+<button onclick="predict()">Predict</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const names=[
+"Time",
+"V1","V2","V3","V4","V5","V6","V7","V8","V9","V10",
+"V11","V12","V13","V14","V15","V16","V17","V18","V19",
+"V20","V21","V22","V23","V24","V25","V26","V27","V28",
+"Amount"
+];
+
+const div=document.getElementById("inputs");
+
+names.forEach(name=>{
+div.innerHTML+=`
+<div>
+<label>${name}</label>
+<input type="number" id="${name}" step="any">
+</div>
+`;
+});
+
+async function predict(){
+
+let values=[];
+
+names.forEach(name=>{
+values.push(parseFloat(document.getElementById(name).value));
+});
+
+const response=await fetch("/predict",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(values)
+
+});
+
+const data=await response.json();
+
+document.getElementById("result").innerHTML=data.prediction;
+
+if(data.prediction=="Fraud Transaction")
+document.getElementById("result").style.color="red";
+else
+document.getElementById("result").style.color="lightgreen";
+
+}
+
+</script>
+
+</body>
+</html>

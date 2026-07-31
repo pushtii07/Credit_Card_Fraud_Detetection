@@ -1,4 +1,4 @@
-from flask import Flask,request, jsonify
+from flask import Flask, request, jsonify, render_template
 import pickle
 import joblib
 import numpy as np 
@@ -9,7 +9,7 @@ scaler = joblib.load("scaler(3).pkl")
 
 @app.route("/")
 def home():
-    return "Credit Card Fraud Detection API is Running!"
+    return render_template("index.html")
 @app.route("/predict", methods=["POST"])
 
 
