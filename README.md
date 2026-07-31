@@ -1,7 +1,11 @@
-# Credit Card Fraud Detection API
+# 💳 Credit Card Fraud Detection API
 
 ## Project Overview
 This project uses a Random Forest Classifier to detect fraudulent credit card transactions. The model is deployed using Flask and exposes a REST API for predictions.
+
+## 🚀 Live Demo
+
+👉 [https://credit-card-fraud-detetection-1.onrender.com/](https://credit-card-fraud-detetection-1.onrender.com/)
 
 ## Technologies Used
 - Python
@@ -10,6 +14,12 @@ This project uses a Random Forest Classifier to detect fraudulent credit card tr
 - NumPy
 - Pandas
 - Joblib
+- GitHub
+- Render
+- HTML
+- CSS
+- JavaScript
+  
 
 ## Model
 - Algorithm: Random Forest Classifier
